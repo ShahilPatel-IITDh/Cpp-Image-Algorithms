@@ -1,8 +1,8 @@
 #ifdef _WIN32
-    #include <direct.h>    // For _mkdir
+#include <direct.h>
 #else
-    #include <sys/stat.h>  // For mkdir
-    #include <sys/types.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 #endif
 
 #include <stdio.h>
@@ -26,13 +26,11 @@ int main() {
     const char *output_bmp_path = "outputImage/output.bmp";
     const char *output_header_path = "imageHeaderFile/output_image.h";
 
-    // Create output folders if they don't exist
     make_dir_if_not_exists("outputImage");
     make_dir_if_not_exists("imageHeaderFile");
 
     int width, height;
     unsigned char **image = load_bmp(input_path, &width, &height);
-
     if (!image) {
         printf("Failed to load image from %s\n", input_path);
         return 1;
@@ -50,8 +48,8 @@ int main() {
     save_as_c_array(output_header_path, binary);
 
     free_image(image, height);
-    printf("✅ Processing complete.\n");
-    printf("📤 Output image: %s\n", output_bmp_path);
-    printf("📄 Header file: %s\n", output_header_path);
+    printf("Processing complete.\n");
+    printf("Output BMP: %s\n", output_bmp_path);
+    printf("Output .h: %s\n", output_header_path);
     return 0;
 }
