@@ -31,13 +31,7 @@ void otsu_binarize(unsigned char input[32][32], unsigned char output[32][32]) {
         }
     }
 
-    // ✅ Invert the binary image: foreground = black, background = white
-    for (int i = 0; i < 32; i++) {
-        for (int j = 0; j < 32; j++) {
-            if (input[i][j] > threshold)
-                output[i][j] = 0;     // Was 255 → Inverted to black
-            else
-                output[i][j] = 255;   // Was 0 → Inverted to white
-        }
-    }
+    for (int i = 0; i < 32; i++)
+        for (int j = 0; j < 32; j++)
+            output[i][j] = (input[i][j] > threshold) ? 0 : 255;
 }
