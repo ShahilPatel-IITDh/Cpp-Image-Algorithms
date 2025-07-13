@@ -9,7 +9,8 @@ void save_as_c_array(const char *filename, unsigned char image[32][32]) {
     for (int i = 0; i < 32; i++) {
         fprintf(f, "    {");
         for (int j = 0; j < 32; j++) {
-            fprintf(f, "%3d", image[i][j]);
+            int val = (image[i][j] == 255) ? 1 : 0;
+            fprintf(f, "%d", val);
             if (j < 31) fprintf(f, ", ");
         }
         fprintf(f, "}");
