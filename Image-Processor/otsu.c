@@ -19,16 +19,11 @@ void otsu_binarize(unsigned char input[32][32], unsigned char output[32][32]) {
         if (wB == 0) continue;
         wF = total - wB;
         if (wF == 0) break;
-
         sumB += t * hist[t];
         float mB = sumB / wB;
         float mF = (sum - sumB) / wF;
-
         float varBetween = wB * wF * (mB - mF) * (mB - mF);
-        if (varBetween > maxVar) {
-            maxVar = varBetween;
-            threshold = t;
-        }
+        if (varBetween > maxVar) { maxVar = varBetween; threshold = t; }
     }
 
     for (int i = 0; i < 32; i++)

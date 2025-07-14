@@ -23,9 +23,11 @@ void make_dir_if_not_exists(const char *dirname) {
 
 int main() {
     const char *input_path = "inputImages/six.bmp";
+    const char *enhanced_bmp_path = "enhancedVersion/enhanced.bmp";
     const char *output_bmp_path = "outputImage/output.bmp";
     const char *output_header_path = "imageHeaderFile/output_image.h";
 
+    make_dir_if_not_exists("enhancedVersion");
     make_dir_if_not_exists("outputImage");
     make_dir_if_not_exists("imageHeaderFile");
 
@@ -40,6 +42,7 @@ int main() {
     resize_to_32x32(image, width, height, resized);
 
     enhance_image(resized);
+    save_bmp(enhanced_bmp_path, resized, 32, 32);
 
     unsigned char binary[32][32];
     otsu_binarize(resized, binary);
@@ -48,8 +51,6 @@ int main() {
     save_as_c_array(output_header_path, binary);
 
     free_image(image, height);
-    printf("Processing complete.\n");
-    printf("Output BMP: %s\n", output_bmp_path);
-    printf("Output .h: %s\n", output_header_path);
+    printf("✅ Processing complete.\n");
     return 0;
 }
